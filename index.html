@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تهنئة عيد الأضحى | الإيسار العربية</title>
+    <title>رمضان كريم | الإيسار العربية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -239,6 +239,15 @@
             margin-bottom: 1.5rem;
             color: var(--primary-color);
             font-weight: 600;
+        }
+        
+        .design-category {
+            font-size: 1.1rem;
+            margin: 1.2rem 0 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #e8dbda;
         }
         
         .design-options {
@@ -535,7 +544,7 @@
             <img alt="شعار ويفز" class="logo" src="https://i.ibb.co/WvDKQQf2/image.gif" />
         </div>
         
-        <h2 id="mainHeading">عيد أضحى مبارك | Happy Eid </h2>
+        <h2 id="mainHeading">رمضان كريم | Ramadan Kareem</h2>
         
         <!-- مرحلة إدخال الاسم -->
         <div class="input-group" id="nameInputGroup">
@@ -553,14 +562,36 @@
         <!-- مرحلة اختيار التصميم -->
         <div class="design-selection" id="designSelection">
             <div class="design-title" id="designTitle">اختر تصميم التهنئة</div>
+            
+            <div class="design-category" id="arabicDesignsLabel">التصاميم العربية</div>
             <div class="design-options">
-                <div class="design-option" data-design="1">
-                    <img src="https://i.ibb.co/vxQc3w9S/1.png" alt="تصميم 1">
+                <div class="design-option" data-design="ar1">
+                    <img src="designs/تهنئة 1 copy.png" alt="تصميم عربي 1">
                     <div class="overlay">التصميم الأول</div>
                 </div>
-                <div class="design-option" data-design="2">
-                    <img src="https://i.ibb.co/s9S4W5XS/2-2.png" alt="تصميم 2">
+                <div class="design-option" data-design="ar2">
+                    <img src="designs/تهنئة 2 copy.png" alt="تصميم عربي 2">
                     <div class="overlay">التصميم الثاني</div>
+                </div>
+                <div class="design-option" data-design="ar3">
+                    <img src="designs/تهنئة 3 copy.png" alt="تصميم عربي 3">
+                    <div class="overlay">التصميم الثالث</div>
+                </div>
+            </div>
+            
+            <div class="design-category" id="englishDesignsLabel">التصاميم الإنجليزية</div>
+            <div class="design-options">
+                <div class="design-option" data-design="en1">
+                    <img src="designs/تهنئة 1  EN copy.png" alt="English Design 1">
+                    <div class="overlay">Design 1</div>
+                </div>
+                <div class="design-option" data-design="en2">
+                    <img src="designs/تهنئة EN  2 copy.png" alt="English Design 2">
+                    <div class="overlay">Design 2</div>
+                </div>
+                <div class="design-option" data-design="en3">
+                    <img src="designs/EN تهنئة 3 copy.png" alt="English Design 3">
+                    <div class="overlay">Design 3</div>
                 </div>
             </div>
         </div>
@@ -594,7 +625,7 @@
             <canvas id="greetingCanvas"></canvas>
             
             <div class="download-share-container" id="downloadShareContainer">
-                <a download="تهنئة-عيد-الأضحى.png" href="#" id="downloadButton">
+                <a download="تهنئة-رمضان-كريم.png" href="#" id="downloadButton">
                     <span>📥</span>
                     <span id="downloadButtonText">تحميل التهنئة</span>
                 </a>
@@ -643,56 +674,124 @@
             // متغيرات التطبيق
             let selectedDesign = null;
             const designImages = {
-                '1': 'https://i.ibb.co/vxQc3w9S/1.png',
-                '2': 'https://i.ibb.co/s9S4W5XS/2-2.png'
+                'ar1': 'designs/تهنئة 1 copy.png',
+                'ar2': 'designs/تهنئة 2 copy.png',
+                'ar3': 'designs/تهنئة 3 copy.png',
+                'en1': 'designs/تهنئة 1  EN copy.png',
+                'en2': 'designs/تهنئة EN  2 copy.png',
+                'en3': 'designs/EN تهنئة 3 copy.png'
             };
             
             // إعدادات الخط لكل تصميم
             const nameStyles = {
-                '1': { 
+                'ar1': { 
                     ar: { 
                         y: 870, 
                         size: 40,
-                        color: "#ffffff",  // لون الخط للاسم العربي
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم العربي
-                        weight: "bold",   // سماكة الخط
-
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
                     },
                     en: { 
                         y: 930, 
                         size: 35,
-                        color: "#ffffff",  // لون الخط للاسم الإنجليزي
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم الإنجليزي
-                        weight: "normal",    // سماكة الخط
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
                     }
                 },
-                '2': { 
+                'ar2': { 
                     ar: { 
-                        y: 640, 
-                        size: 38,
-                        color: "#593425",  // لون الخط للاسم العربي
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم العربي
-                        weight: "bold",    // سماكة الخط
+                        y: 870, 
+                        size: 40,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
                     },
                     en: { 
-                        y: 690, 
-                        size: 32,
-                        color: "#593425",  // لون الخط للاسم الإنجليزي
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم الإنجليزي
-                        weight: "bold",  // سماكة الخط
-
+                        y: 930, 
+                        size: 35,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
+                    }
+                },
+                'ar3': { 
+                    ar: { 
+                        y: 870, 
+                        size: 40,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
+                    },
+                    en: { 
+                        y: 930, 
+                        size: 35,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
+                    }
+                },
+                'en1': { 
+                    ar: { 
+                        y: 870, 
+                        size: 40,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
+                    },
+                    en: { 
+                        y: 930, 
+                        size: 35,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
+                    }
+                },
+                'en2': { 
+                    ar: { 
+                        y: 870, 
+                        size: 40,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
+                    },
+                    en: { 
+                        y: 930, 
+                        size: 35,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
+                    }
+                },
+                'en3': { 
+                    ar: { 
+                        y: 870, 
+                        size: 40,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "bold",
+                    },
+                    en: { 
+                        y: 930, 
+                        size: 35,
+                        color: "#ffffff",
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",
+                        weight: "normal",
                     }
                 }
             };
             
             // نصوص للغة العربية
             const arabicTexts = {
-                heading: "عيد أضحى مبارك | Happy Eid",
+                heading: "رمضان كريم | Ramadan Kareem",
                 arabicLabel: "الاسم باللغة العربية",
                 arabicPlaceholder: "اكتب اسمك هنا...",
                 englishLabel: "الاسم باللغة الإنجليزية",
                 englishPlaceholder: "Enter your name here...",
                 designTitle: "اختر تصميم التهنئة",
+                arabicDesigns: "التصاميم العربية",
+                englishDesigns: "التصاميم الإنجليزية",
                 nextButton: "التالي",
                 backButton: "رجوع",
                 generateButton: "إنشاء التهنئة",
@@ -706,12 +805,14 @@
             
             // نصوص للغة الإنجليزية
             const englishTexts = {
-                heading: "عيد أضحى مبارك | Happy Eid",
+                heading: "رمضان كريم | Ramadan Kareem",
                 arabicLabel: "Name in Arabic",
                 arabicPlaceholder: "Write your name in Arabic...",
                 englishLabel: "Name in English",
                 englishPlaceholder: "Write your name here...",
                 designTitle: "Choose Greeting Design",
+                arabicDesigns: "Arabic Designs",
+                englishDesigns: "English Designs",
                 nextButton: "Next",
                 backButton: "Back",
                 generateButton: "Generate Greeting",
@@ -786,6 +887,8 @@
                 document.getElementById('successMessage').textContent = texts.successMessage;
                 document.getElementById('downloadButtonText').textContent = texts.downloadButton;
                 document.getElementById('shareTitle').textContent = texts.shareTitle;
+                document.getElementById('arabicDesignsLabel').textContent = texts.arabicDesigns;
+                document.getElementById('englishDesignsLabel').textContent = texts.englishDesigns;
             }
             
             // دالة للانتقال إلى مرحلة اختيار التصميم
@@ -942,8 +1045,8 @@
                 const imageDataUrl = canvas.toDataURL('image/png');
                 const isArabic = htmlElement.getAttribute('dir') === 'rtl';
                 const shareText = isArabic ? 
-                    `تهنئة عيد أضحى مبارك من ${name} عبر الإيسار العربية! 🎉` : 
-                    `Happy Eid Al-Adha greetings from ${name} via Arbian Essar! 🎉`;
+                    `تهنئة رمضان كريم من ${name} عبر الإيسار العربية! �` : 
+                    `Ramadan Kareem greetings from ${name} via Arabian Essar! �`;
                 const shareUrl = window.location.href;
                 
                 // تويتر
