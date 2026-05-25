@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تهنئة عيد الفطر | الإيسار العربية</title>
+    <title>تهنئة عيد الأضحى | الإيسار العربية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -544,7 +544,7 @@
             <img alt="شعار ويفز" class="logo" src="https://i.ibb.co/WvDKQQf2/image.gif" />
         </div>
         
-        <h2 id="mainHeading">عيد فطر سعيد | Happy Eid</h2>
+        <h2 id="mainHeading">عيد أضحى سعيد | Happy Eid Al-Adha</h2>
         
         <!-- مرحلة إدخال الاسم -->
         <div class="input-group" id="nameInputGroup">
@@ -559,26 +559,20 @@
             </div>
         </div>
         
-        <!-- مرحلة اختيار التصميم -->
-        <div class="design-selection" id="designSelection">
-            <div class="design-title" id="designTitle">اختر تصميم التهنئة</div>
-            
-            <div class="design-options">
-                <div class="design-option" data-design="op1">
-                    <img src="designs/op1.png" alt="التصميم الأول">
-                    <div class="overlay">التصميم الأول</div>
-                </div>
-                <div class="design-option" data-design="op2">
-                    <img src="designs/op2.png" alt="التصميم الثاني">
-                    <div class="overlay">التصميم الثاني</div>
+        <!-- مرحلة اختيار التصميم (مخفية - تصميم عيد الأضحى مفعل تلقائياً) -->
+        <div class="design-selection" id="designSelection" style="display: none;">
+            <div class="design-options" style="display: none;">
+                <div class="design-option selected" data-design="eid-adha">
+                    <img src="designs/design.png" alt="تصميم عيد الأضحى">
+                    <div class="overlay">عيد الأضحى</div>
                 </div>
             </div>
         </div>
         
         <div class="button-container">
-            <button id="nextButton" class="secondary">
-                <span id="nextButtonText">التالي</span>
-                <span>→</span>
+            <button id="nextButton">
+                <span>🎨</span>
+                <span id="nextButtonText">إنشاء التهنئة</span>
             </button>
             <button id="generateButton" style="display: none;">
                 <span id="generateButtonText">إنشاء التهنئة</span>
@@ -604,7 +598,7 @@
             <canvas id="greetingCanvas"></canvas>
             
             <div class="download-share-container" id="downloadShareContainer">
-    <a download="تهنئة-عيد-الفطر.png" href="#" id="downloadButton">
+    <a download="تهنئة-عيد-الأضحى.png" href="#" id="downloadButton">
                     <span>📥</span>
                     <span id="downloadButtonText">تحميل التهنئة</span>
                 </a>
@@ -651,57 +645,52 @@
             const htmlElement = document.documentElement;
             
             // متغيرات التطبيق
-            let selectedDesign = null;
+            let selectedDesign = 'eid-adha';
             const designImages = {
-                'op1': 'designs/op1.png',
-                'op2': 'designs/op2.png'
+                'eid-adha': 'designs/design.png'
             };
             
             // إعدادات الخط لكل تصميم
             const nameStyles = {
-                'op1': { 
+                'eid-adha': { 
                     ar: { 
-                        y: 990, 
-                        size: 40,
+                        y: 850, 
+                        size: 45,
                         color: "#ffffff",
                         font: "'Frutiger LT Arabic', Arial, sans-serif",
                         weight: "bold",
+                        shadow: {
+                            color: "rgba(0, 0, 0, 0.5)",
+                            blur: 5,
+                            offsetX: 2,
+                            offsetY: 2
+                        }
                     },
                     en: { 
-                        y: 1050, 
-                        size: 35,
-                        color: "#ffffff",
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",
-                        weight: "normal",
-                    }
-                },
-                'op2': { 
-                    ar: { 
-                        y: 990, 
+                        y: 920, 
                         size: 40,
                         color: "#ffffff",
                         font: "'Frutiger LT Arabic', Arial, sans-serif",
-                        weight: "bold",
-                    },
-                    en: { 
-                        y: 1050, 
-                        size: 35,
-                        color: "#ffffff",
-                        font: "'Frutiger LT Arabic', Arial, sans-serif",
                         weight: "normal",
+                        shadow: {
+                            color: "rgba(0, 0, 0, 0.5)",
+                            blur: 5,
+                            offsetX: 2,
+                            offsetY: 2
+                        }
                     }
                 }
             };
             
             // نصوص للغة العربية
             const arabicTexts = {
-                heading: "عيد فطر سعيد",
+                heading: "عيد أضحى سعيد",
                 arabicLabel: "الاسم باللغة العربية",
                 arabicPlaceholder: "اكتب اسمك هنا...",
                 englishLabel: "الاسم باللغة الإنجليزية",
                 englishPlaceholder: "Enter your name here...",
                 designTitle: "اختر تصميم التهنئة",
-                nextButton: "التالي",
+                nextButton: "إنشاء التهنئة",
                 backButton: "رجوع",
                 generateButton: "إنشاء التهنئة",
                 loadingText: "جاري إنشاء التهنئة، الرجاء الانتظار...",
@@ -714,13 +703,13 @@
             
             // نصوص للغة الإنجليزية
             const englishTexts = {
-                heading: "Happy Eid",
+                heading: "Happy Eid Al-Adha",
                 arabicLabel: "Name in Arabic",
                 arabicPlaceholder: "Write your name in Arabic...",
                 englishLabel: "Name in English",
                 englishPlaceholder: "Write your name here...",
                 designTitle: "Choose Greeting Design",
-                nextButton: "Next",
+                nextButton: "Generate Greeting",
                 backButton: "Back",
                 generateButton: "Generate Greeting",
                 loadingText: "Generating your greeting, please wait...",
@@ -809,16 +798,8 @@
                     return;
                 }
                 
-                nameInputGroup.style.display = 'none';
-                designSelection.style.display = 'block';
-                nextButton.style.display = 'none';
-                generateButton.style.display = 'inline-flex';
-                backButton.style.display = 'inline-flex';
-                
-                // التمرير إلى الأعلى لنرى خيارات التصميم
-                setTimeout(() => {
-                    designSelection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
+                // مباشرة إنشاء البطاقة بدون اختيار التصميم
+                generateCard();
             }
             
             // دالة للرجوع إلى مرحلة إدخال الاسم
@@ -828,10 +809,9 @@
                 nextButton.style.display = 'inline-flex';
                 generateButton.style.display = 'none';
                 backButton.style.display = 'none';
-                
-                // إلغاء تحديد أي تصميم
-                designOptions.forEach(option => option.classList.remove('selected'));
-                selectedDesign = null;
+                resultContainer.style.display = 'none';
+                canvas.style.display = 'none';
+                downloadShareContainer.style.display = 'none';
                 
                 // التمرير إلى الأعلى لنرى حقول الإدخال
                 setTimeout(() => {
@@ -950,8 +930,8 @@
                 const imageDataUrl = canvas.toDataURL('image/png');
                 const isArabic = htmlElement.getAttribute('dir') === 'rtl';
                 const shareText = isArabic ? 
-                    `تهنئة عيد الفطر المبارك من ${name} عبر الإيسار العربية! 🎉` : 
-                    `Eid Mubarak greetings from ${name} via Arabian Essar! 🎉`;
+                    `تهنئة عيد الأضحى المبارك من ${name} عبر الإيسار العربية! 🎉` : 
+                    `Eid Al-Adha Mubarak greetings from ${name} via Arabian Essar! 🎉`;
                 const shareUrl = window.location.href;
                 
                 // تويتر
